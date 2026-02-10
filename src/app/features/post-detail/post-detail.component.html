@@ -1,0 +1,72 @@
+<div class="post-detail-container" *ngIf="!isLoading() && post() as p">
+  <button class="back-btn" (click)="goBack()">← Back to Feed</button>
+
+  <div class="detail-card">
+    <div class="detail-header">
+      <div class="meta-left">
+        <span class="author">@{{ p.authorName }}</span>
+        <span class="divider">•</span>
+        <span class="timestamp">{{ p.timestamp | date:'mediumDate' }}</span>
+      </div>
+      <div class="meta-right">
+        <span class="team-badge">{{ p.team }}</span>
+        <span class="mood-badge">{{ p.mood }}</span>
+      </div>
+    </div>
+
+    <h1 class="detail-title">{{ p.title || 'Untitled Meme' }}</h1>
+
+    <div class="detail-body">
+      <ng-container *ngFor="let seg of parsedBody(); let i = index">
+        <span *ngIf="!seg.isSpoiler">{{ seg.text }}</span>
+        <span
+          *ngIf="seg.isSpoiler"
+          class="spoiler"
+          [class.revealed]="isRevealed(i)"
+          (click)="toggleSpoiler(i)">
+          {{ seg.text }}
+        </span>
+      </ng-container>
+    </div>
+
+    <div class="detail-tags">
+      <span *ngFor="let tag of p.tags" class="tag">#{{ tag }}</span>
+    </div>
+
+    <div class="detail-actions">
+      <div class="primary-actions">
+        <button
+          class="action-btn"
+          [class.liked]="p.isLiked"
+          (click)="toggleLike()">
+          {{ p.isLiked ? '❤️' : '🤍' }} {{ p.likesCount }}
+        </button>
+
+        <button
+          class="action-btn"
+          [class.saved]="p.isBookmarked"
+          (click)="toggleBookmark()">
+          {{ p.isBookmarked ? 'bookmark_added' : 'bookmark_border' }}
+        </button>
+      </div>
+
+      <div class="owner-actions" *ngIf="isAuthor() || isAdmin()">
+        <button class="icon-btn edit-btn" (click)="onEdit()" *ngIf="isAuthor()">✏️ Edit</button>
+        <button class="icon-btn delete-btn" (click)="onDelete()">🗑️ Delete</button>
+      </div>
+
+      <div class="report-action" *ngIf="!isAuthor()">
+        <button class="icon-btn flag-btn" (click)="onReport()">🚩 Report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading()" class="loading-state">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="error()" class="error-state">
+  <p>{{ error() }}</p>
+  <button (click)="goBack()">Go Back</button>
+</div>

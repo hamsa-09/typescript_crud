@@ -1,0 +1,23 @@
+<div class="app-container">
+  <!-- Header only shows when user is logged in -->
+  <header class="app-header" *ngIf="authService.currentUser$ | async as user">
+    <div class="header-content container">
+      <div class="logo">
+        <a routerLink="/feed" class="logo-link">
+          <h1>HashedIn Meme Forum</h1>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a routerLink="/feed" routerLinkActive="active" class="nav-link">Feed</a>
+        <a routerLink="/compose" routerLinkActive="active" class="nav-link">New Meme</a>
+        <a routerLink="/me/profile" routerLinkActive="active" class="nav-link">Profile</a>
+        <a *ngIf="user.role === 'admin'" routerLink="/admin/moderation" routerLinkActive="active" class="nav-link">Moderation</a>
+        <button (click)="logout()" class="nav-link logout-btn">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content" [class.no-header]="!(authService.currentUser$ | async)">
+    <router-outlet></router-outlet>
+  </main>
+</div>

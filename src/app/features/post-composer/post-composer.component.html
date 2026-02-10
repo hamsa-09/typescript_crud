@@ -1,0 +1,74 @@
+<div class="composer-container">
+  <div class="composer-card">
+    <h2 class="composer-title">{{ isLoading() ? 'Loading...' : (isEditMode() ? 'Edit Meme' : 'Compose Meme') }}</h2>
+
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading()">
+      <!-- Title -->
+      <ui-input
+        label="Title (optional)"
+        placeholder="e.g., POV: Standup at 9:30"
+        formControlName="title"
+        name="title">
+      </ui-input>
+
+      <div class="field-row">
+        <!-- Team -->
+        <ui-select
+          label="Team"
+          formControlName="team"
+          name="team"
+          [options]="teamOptions"
+          [showNoneOption]="false">
+        </ui-select>
+
+         <!-- Mood -->
+        <ui-select
+          label="Mood"
+          formControlName="mood"
+          name="mood"
+          [options]="moodOptions">
+        </ui-select>
+      </div>
+
+      <!-- Content (Body) -->
+      <ui-input
+        label="Body (required)"
+        type="textarea"
+        [rows]="6"
+        placeholder="Use ||spoiler|| for spoilers."
+        formControlName="content"
+        name="content"
+        [error]="postForm.get('content')?.invalid && postForm.get('content')?.touched ? 'Content is required' : ''">
+      </ui-input>
+
+       <!-- Tags -->
+       <div class="tags-section">
+        <ui-input
+          label="Tags"
+          placeholder="Type tag & press Enter"
+          [(ngModel)]="tagInput"
+          [ngModelOptions]="{standalone: true}"
+          name="tagInput"
+          (keydown.enter)="addTag($event)">
+        </ui-input>
+
+        <div class="tags-list">
+          <ui-tag
+            *ngFor="let tag of postForm.get('tags')?.value"
+            variant="secondary"
+            [removable]="true"
+            (onRemove)="removeTag(tag)">
+            #{{ tag }}
+          </ui-tag>
+        </div>
+       </div>
+
+       <div class="actions">
+         <ui-button variant="ghost" (onClick)="cancel()">Cancel</ui-button>
+         <ui-button variant="primary" type="submit" [disabled]="postForm.invalid">
+           {{ isEditMode() ? 'Save Changes' : 'Post Meme' }}
+         </ui-button>
+       </div>
+    </form>
+  </div>
+</div>

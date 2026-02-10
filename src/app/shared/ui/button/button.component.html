@@ -1,0 +1,6 @@
+<button
+  [class]="'ui-btn ' + variant"
+  [disabled]="disabled"
+  (click)="onClick.emit($event)">
+  <ng-content></ng-content>
+</button>

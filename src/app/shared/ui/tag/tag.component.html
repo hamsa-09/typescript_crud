@@ -1,0 +1,4 @@
+<span class="ui-tag" [ngClass]="variant" [style.cursor]="clickable ? 'pointer' : 'default'" (click)="onClick.emit($event)">
+  <ng-content></ng-content>
+  <span *ngIf="removable" class="remove-icon" (click)="onRemove.emit($event)">×</span>
+</span>

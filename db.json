@@ -1,0 +1,298 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "user1@example.com",
+      "password": "password",
+      "role": "user",
+      "name": "Alex User"
+    },
+    {
+      "id": 2,
+      "email": "user2@example.com",
+      "password": "password",
+      "role": "user",
+      "name": "Sam User"
+    },
+    {
+      "id": 3,
+      "email": "admin@example.com",
+      "password": "admin",
+      "role": "admin",
+      "name": "Super Admin"
+    },
+    {
+      "email": "hamsa@gmail.com",
+      "password": "$2a$10$jDog/85rpVoFFeFKO.rsteGWppc0OuZ5bDyO.im7Q0SqVmiORmcsa",
+      "name": "Hamsa",
+      "id": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Launch Day Excitement",
+      "content": "Finally launching our new feature today! ||spoiler|| It's going to be awesome.",
+      "timestamp": "2024-02-10T09:00:00Z",
+      "team": "Product",
+      "mood": "Excited",
+      "tags": [
+        "launch",
+        "feature"
+      ],
+      "spoiler": true,
+      "views": 100,
+      "isDeleted": false
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Bug Hunt",
+      "content": "Found a critical bug right before demo.",
+      "timestamp": "2024-02-10T10:00:00Z",
+      "team": "Engineering",
+      "mood": "Stressed",
+      "tags": [
+        "bug",
+        "urgent"
+      ],
+      "spoiler": false,
+      "views": 50,
+      "isDeleted": false
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "Design Specs Updated",
+      "content": "Updated the Figma files for the new dashboard.",
+      "timestamp": "2024-02-09T14:30:00Z",
+      "team": "Design",
+      "mood": "Productive",
+      "tags": [
+        "figma",
+        "dashboard"
+      ],
+      "spoiler": false,
+      "views": 20,
+      "isDeleted": false
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "title": "Team Outing",
+      "content": "Planning a team outing next month! Any suggestions?",
+      "timestamp": "2024-02-08T11:15:00Z",
+      "team": "HR",
+      "mood": "Happy",
+      "tags": [
+        "social",
+        "planning"
+      ],
+      "spoiler": false,
+      "views": 80,
+      "isDeleted": false
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "title": "React version upgrade",
+      "content": "We need to upgrade to React 19 soon. Oh wait, this is Angular app.",
+      "timestamp": "2024-02-08T09:00:00Z",
+      "team": "Engineering",
+      "mood": "Funny",
+      "tags": [
+        "tech",
+        "joke"
+      ],
+      "spoiler": false,
+      "views": 45,
+      "isDeleted": false
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "title": "New coffee machine",
+      "content": "The new coffee machine in the break room is amazing.",
+      "timestamp": "2024-02-07T08:30:00Z",
+      "team": "General",
+      "mood": "Happy",
+      "tags": [
+        "coffee",
+        "office"
+      ],
+      "spoiler": false,
+      "views": 60,
+      "isDeleted": false
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "title": "Quarterly Goals",
+      "content": "Please review your quarterly goals by EOD.",
+      "timestamp": "2024-02-06T16:00:00Z",
+      "team": "Product",
+      "mood": "Serious",
+      "tags": [
+        "goals",
+        "deadline"
+      ],
+      "spoiler": false,
+      "views": 90,
+      "isDeleted": false
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "title": "Testing strategies",
+      "content": "Should we switch to Cypress or stick with Playwright?",
+      "timestamp": "2024-02-05T13:45:00Z",
+      "team": "Engineering",
+      "mood": "Questioning",
+      "tags": [
+        "testing",
+        "qa"
+      ],
+      "spoiler": false,
+      "views": 30,
+      "isDeleted": false
+    },
+    {
+      "id": 9,
+      "userId": 1,
+      "title": "Design System components",
+      "content": "Refactored the button component to support diverse sizes.",
+      "timestamp": "2024-02-04T10:20:00Z",
+      "team": "Design",
+      "mood": "Productive",
+      "tags": [
+        "components",
+        "ui"
+      ],
+      "spoiler": false,
+      "views": 25,
+      "isDeleted": false
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "title": "Server downtime",
+      "content": "Expect some downtime tonight for maintenance.",
+      "timestamp": "2024-02-03T18:00:00Z",
+      "team": "DevOps",
+      "mood": "Warning",
+      "tags": [
+        "maintenance",
+        "downtime"
+      ],
+      "spoiler": false,
+      "views": 70,
+      "isDeleted": false
+    },
+    {
+      "title": "sss",
+      "team": "Backend",
+      "content": "sss",
+      "mood": "POV",
+      "tags": null,
+      "userId": 4,
+      "timestamp": "2026-02-09T20:34:12.061Z",
+      "views": 0,
+      "isDeleted": false,
+      "id": 11
+    }
+  ],
+  "likes": [
+    {
+      "id": 1,
+      "userId": 2,
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "postId": 2
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "postId": 4
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "postId": 4
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "postId": 6
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "postId": 6
+    },
+    {
+      "id": 8,
+      "userId": 1,
+      "postId": 8
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "postId": 9
+    },
+    {
+      "postId": 2,
+      "userId": 4,
+      "id": 10
+    },
+    {
+      "postId": 11,
+      "userId": 4,
+      "id": 11
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 2
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "postId": 8
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "postId": 8
+    },
+    {
+      "postId": 2,
+      "userId": 4,
+      "id": 5
+    },
+    {
+      "postId": 11,
+      "userId": 4,
+      "id": 6
+    }
+  ],
+  "flags": [
+    {
+      "id": 1,
+      "userId": 3,
+      "postId": 8,
+      "reason": "Not related to memes",
+      "status": "open"
+    }
+  ]
+}

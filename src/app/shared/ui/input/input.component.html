@@ -1,0 +1,26 @@
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>{{ label }}</mat-label>
+
+  <ng-container *ngIf="type !== 'textarea'; else textArea">
+    <input matInput
+      [type]="type"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [(ngModel)]="value"
+      (ngModelChange)="onChange($event)"
+      (blur)="onTouched()">
+  </ng-container>
+
+  <ng-template #textArea>
+    <textarea matInput
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [rows]="rows"
+      [(ngModel)]="value"
+      (ngModelChange)="onChange($event)"
+      (blur)="onTouched()">
+    </textarea>
+  </ng-template>
+
+  <mat-error *ngIf="error">{{ error }}</mat-error>
+</mat-form-field>

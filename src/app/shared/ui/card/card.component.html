@@ -1,0 +1,10 @@
+<div
+  class="ui-card"
+  [style.cursor]="clickable ? 'pointer' : 'default'"
+  (click)="onClick.emit($event)">
+  <div class="card-header" *ngIf="title">
+    <h3 class="card-title">{{ title }}</h3>
+    <ng-content select="[card-header-actions]"></ng-content>
+  </div>
+  <ng-content></ng-content>
+</div>

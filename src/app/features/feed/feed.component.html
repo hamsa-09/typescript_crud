@@ -1,0 +1,128 @@
+<div class="feed-container">
+  <!-- Search and Filters Row -->
+  <div class="search-filter-row">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        placeholder="Search memes..."
+        #searchInput
+        (input)="searchQuery.set(searchInput.value)"
+        class="search-input">
+    </div>
+
+    <select #teamSelect (change)="selectedTeam.set(teamSelect.value || '')" class="filter-select">
+      <option value="">Team: All</option>
+      <option value="Frontend">Team: Frontend</option>
+      <option value="Backend">Team: Backend</option>
+      <option value="Platform">Team: Platform</option>
+      <option value="QA">Team: QA</option>
+      <option value="Design">Team: Design</option>
+      <option value="Product">Team: Product</option>
+    </select>
+
+    <select #moodSelect (change)="selectedMood.set(moodSelect.value || '')" class="filter-select">
+      <option value="">Mood: Any</option>
+      <option value="POV">Mood: POV</option>
+      <option value="Relatable">Mood: Relatable</option>
+      <option value="Sarcastic">Mood: Sarcastic</option>
+      <option value="Dad-joke">Mood: Dad-joke</option>
+      <option value="Chaos">Mood: Chaos</option>
+    </select>
+  </div>
+
+  <!-- Toggle Filters and Actions Row -->
+  <div class="actions-row">
+    <div class="toggle-filters">
+      <span
+        class="filter-toggle"
+        [class.active]="showSavedOnly()"
+        (click)="showSavedOnly.update(v => !v)">
+        Saved only
+      </span>
+      <span
+        class="filter-toggle"
+        [class.active]="showLikedOnly()"
+        (click)="showLikedOnly.update(v => !v)">
+        Liked by me
+      </span>
+    </div>
+
+    <div class="right-actions">
+      <select #sortSelect (change)="onSortChange(sortSelect.value)" class="sort-select">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+      </select>
+
+      <ui-button variant="primary" (onClick)="openCreate()">
+        ➕ New Meme
+      </ui-button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="memeService.isLoading()" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading memes...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="memeService.error()" class="error-state">
+    <p>{{ memeService.error() }}</p>
+    <button (click)="memeService.loadPosts()">Retry</button>
+  </div>
+
+  <!-- Posts List -->
+  <div class="posts-list" *ngIf="!memeService.isLoading()">
+    <div *ngIf="memeService.posts().length === 0" class="empty-state">
+      <p *ngIf="searchQuery()">No memes found matching "{{ searchQuery() }}"</p>
+      <p *ngIf="!searchQuery()">No memes found. Be the first to post!</p>
+    </div>
+
+    <div
+      *ngFor="let post of memeService.posts()"
+      class="post-card"
+      (click)="openPost(post.id)">
+
+      <div class="post-header">
+        <div class="post-meta">
+          <span class="author">@{{ post.authorName }}</span>
+          <span class="divider">•</span>
+          <span class="team-badge">Team: {{ post.team }}</span>
+          <span class="divider">•</span>
+          <span class="mood-badge">Mood: {{ post.mood }}</span>
+          <span class="divider">•</span>
+          <span class="timestamp">{{ getRelativeTime(post.timestamp) }}</span>
+        </div>
+      </div>
+
+      <h3 class="post-title">{{ post.title || '@' + post.authorName }}</h3>
+
+      <div class="post-body-preview">
+        {{ getPreview(post.content) }}
+      </div>
+
+      <div class="post-tags">
+        <span *ngFor="let tag of post.tags" class="tag">#{{ tag }}</span>
+      </div>
+
+      <div class="post-footer" (click)="$event.stopPropagation()">
+        <div class="footer-left">
+          <button
+            class="action-btn"
+            [class.liked]="post.isLiked"
+            (click)="toggleLike(post, $event)">
+            {{ post.isLiked ? '❤️' : '🤍' }} {{ post.likesCount }}
+          </button>
+
+          <button
+            class="action-btn"
+            [class.saved]="post.isBookmarked"
+            (click)="toggleBookmark(post, $event)">
+            {{ post.isBookmarked ? '🔖 Saved' : '🔖 Save' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
