@@ -155,11 +155,15 @@ export class PostDetailComponent {
   }
 
   onReport() {
-    // Flag implementation (POST /flags)
     const p = this.post();
-    if (p) {
-        // TODO: Implement flag service method
-        alert('Post reported to admins.');
+    if (!p) return;
+
+    const reason = prompt('Why are you reporting this post?');
+    if (reason) {
+      this.memeService.reportPost(p.id, reason).subscribe({
+        next: () => alert('Post reported to admins.'),
+        error: () => alert('Failed to report post.')
+      });
     }
   }
 

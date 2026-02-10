@@ -17,15 +17,37 @@
     {
       "id": 3,
       "email": "admin@example.com",
-      "password": "admin",
+      "password": "admin1",
       "role": "admin",
       "name": "Super Admin"
     },
     {
       "email": "hamsa@gmail.com",
-      "password": "$2a$10$jDog/85rpVoFFeFKO.rsteGWppc0OuZ5bDyO.im7Q0SqVmiORmcsa",
+      "password": "password",
       "name": "Hamsa",
+      "role": "user",
       "id": 4
+    },
+    {
+      "email": "ars@gmail.com",
+      "password": "password",
+      "name": "ars",
+      "role": "user",
+      "id": 5
+    },
+    {
+      "email": "dh@gmail.com",
+      "password": "password",
+      "name": "dh",
+      "role": "user",
+      "id": 6
+    },
+    {
+      "email": "kavin@gmail.com",
+      "password": "password",
+      "name": "kavin",
+      "role": "user",
+      "id": 7
     }
   ],
   "posts": [
@@ -198,7 +220,7 @@
       "userId": 4,
       "timestamp": "2026-02-09T20:34:12.061Z",
       "views": 0,
-      "isDeleted": false,
+      "isDeleted": true,
       "id": 11
     }
   ],

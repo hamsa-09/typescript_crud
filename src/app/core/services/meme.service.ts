@@ -340,6 +340,21 @@ export class MemeService {
       );
   }
 
+  reportPost(postId: number, reason: string): Observable<any> {
+    const currentUser = this.authService.currentUserValue;
+    if (!currentUser) return new Observable();
+
+    const flag = {
+      postId,
+      userId: currentUser.id,
+      reason,
+      status: 'open',
+      timestamp: new Date().toISOString()
+    };
+
+    return this.http.post(`${this.apiUrl}/flags`, flag);
+  }
+
   getFlags(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/flags?_expand=post&_expand=user`);
   }

@@ -51,10 +51,11 @@ export class AuthService {
   }
 
   register(userData: { email: string; password: string; name: string }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, { ...userData, role: 'user' }).pipe(
       tap(response => {
         this.saveSession(response);
-      })
+      }),
+      catchError(this.handleError.bind(this))
     );
   }
 
@@ -62,7 +63,8 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         this.saveSession(response);
-      })
+      }),
+      catchError(this.handleError.bind(this))
     );
   }
 
@@ -80,12 +82,25 @@ export class AuthService {
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage = 'An error occurred. Please try again later.';
+
     if (error.error instanceof ErrorEvent) {
+      // Client-side error
       errorMessage = error.error.message;
     } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // Server-side error
+      // json-server-auth returns the error message as a string in error.error
+      if (typeof error.error === 'string') {
+        errorMessage = error.error;
+      } else if (error.error && typeof error.error.message === 'string') {
+        errorMessage = error.error.message;
+      } else if (error.status === 400 || error.status === 401) {
+        errorMessage = 'Invalid email or password.';
+      } else if (error.status === 404) {
+        errorMessage = 'Service not found.';
+      }
     }
-    return throwError(errorMessage);
+
+    return throwError(() => errorMessage);
   }
 }

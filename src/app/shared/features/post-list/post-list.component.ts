@@ -60,10 +60,10 @@ import { AuthService } from '../../../core/services/auth.service';
             </button>
           </div>
 
-          <!-- Admin Actions -->
-          <div class="footer-right" *ngIf="isAdmin()">
+          <!-- Owner or Admin Actions -->
+          <div class="footer-right" *ngIf="isOwner(post) || isAdmin()">
             <button *ngIf="!post.isDeleted" class="admin-btn delete" (click)="deletePost(post, $event)">🗑️ Delete</button>
-            <button *ngIf="post.isDeleted" class="admin-btn restore" (click)="restorePost(post, $event)">♻️ Restore</button>
+            <button *ngIf="post.isDeleted && isAdmin()" class="admin-btn restore" (click)="restorePost(post, $event)">♻️ Restore</button>
           </div>
         </div>
       </div>
@@ -115,6 +115,11 @@ export class PostListComponent {
 
   isAdmin() {
       return this.authService.isAdmin();
+  }
+
+  isOwner(post: Post) {
+      const currentUser = this.authService.currentUserValue;
+      return currentUser && post.userId === currentUser.id;
   }
 
   toggleLike(post: Post, event: Event) {
